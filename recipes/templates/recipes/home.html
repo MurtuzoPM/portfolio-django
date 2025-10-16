@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Portfolio - Creative Developer{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <h1 class="text-gradient">Hello, I'm a Creative Developer</h1>
+    <p class="lead">My name is Murtuzo and I craft beautiful digital experiences with modern technologies and clean design principles.</p>
+    <a href="#projects" class="btn">View My Work</a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">Passionate about creating innovative solutions that make a difference</p>
+    
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-code-slash"></i>
+          </div>
+          <h3>Full-Stack Development</h3>
+          <p>I specialize in building responsive web applications using modern frameworks and best practices. From frontend design to backend architecture, I bring ideas to life.</p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-palette"></i>
+          </div>
+          <h3>UI/UX Design</h3>
+          <p>Creating intuitive and beautiful user interfaces is my passion. I focus on user-centered design principles to deliver exceptional digital experiences.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-subtitle">A showcase of my recent work and creative solutions</p>
+    
+    <div class="row g-4">
+      {% for recipe in recipes %}
+        <div class="col-md-4">
+          <div class="card">
+            {% if recipe.image %}
+              <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+            {% else %}
+              <img src="https://picsum.photos/600/400?random={{ forloop.counter }}" class="card-img-top" alt="Project image" onerror="this.src='https://via.placeholder.com/600x400/6366f1/ffffff?text=Project+Image'">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text">{{ recipe.summary|default:recipe.description|truncatewords:20 }}</p>
+              <div class="mb-3">
+                {% for tag in recipe.tags.all %}
+                  <span class="badge me-1">{{ tag.name }}</span>
+                {% endfor %}
+              </div>
+              <a href="{{ recipe.get_absolute_url }}" class="btn btn-primary">View Project</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center">
+          <p class="text-muted">No projects available yet. Check back soon!</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">Let's work together to create something amazing</p>
+    
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="contact-form">
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="email" class="form-control" placeholder="Your Email" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Subject" required>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

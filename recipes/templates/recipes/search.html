@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Search Results - Portfolio{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Search Results for "{{ query }}"</h2>
+    <p class="section-subtitle">Found {{ recipes|length }} project{{ recipes|length|pluralize }}</p>
+    
+    <div class="row g-4">
+      {% for recipe in recipes %}
+        <div class="col-md-4">
+          <div class="card">
+            {% if recipe.image %}
+              <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+            {% else %}
+              <img src="https://picsum.photos/600/400?random={{ forloop.counter }}" class="card-img-top" alt="Project image" onerror="this.src='https://via.placeholder.com/600x400/6366f1/ffffff?text=Project+Image'">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text">{{ recipe.summary|default:recipe.description|truncatewords:20 }}</p>
+              <a href="{{ recipe.get_absolute_url }}" class="btn btn-primary">View Project</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center">
+          <p class="text-muted">No projects found matching "{{ query }}". Try a different search term.</p>
+          <a href="/" class="btn btn-primary">Back to Portfolio</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

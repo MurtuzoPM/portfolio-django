@@ -1,0 +1,15 @@
+<svg width="1600" height="320" viewBox="0 0 1600 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hero banner">
+  <defs>
+    <linearGradient id="h" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3a86ff"/>
+      <stop offset="100%" stop-color="#2f6fe0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="320" fill="url(#h)"/>
+  <g fill="white" opacity="0.15">
+    <circle cx="200" cy="100" r="90"/>
+    <circle cx="850" cy="240" r="70"/>
+    <circle cx="1400" cy="80" r="110"/>
+  </g>
+</svg>
+

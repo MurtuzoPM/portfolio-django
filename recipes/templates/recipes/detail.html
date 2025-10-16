@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ recipe.title }} - Portfolio Project{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1 class="section-title text-start mb-4">{{ recipe.title }}</h1>
+        {% if recipe.image %}
+          <img src="{{ recipe.image.url }}" class="img-fluid rounded-xl mb-4 shadow-soft" alt="{{ recipe.title }}">
+        {% else %}
+          <img src="https://picsum.photos/1200/800?random=1" class="img-fluid rounded-xl mb-4 shadow-soft" alt="Project image" onerror="this.src='https://via.placeholder.com/1200x800/6366f1/ffffff?text=Project+Image'">
+        {% endif %}
+        <p class="lead text-light">{{ recipe.description }}</p>
+        
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <h3 class="h4 mb-3">Technologies Used</h3>
+            <ul class="list-unstyled">
+              {% for line in ingredients_text %}
+                <li class="mb-2 d-flex align-items-center">
+                  <span class="badge me-3">✓</span>
+                  {{ line }}
+                </li>
+              {% empty %}
+                {% for ing in recipe.ingredients.all %}
+                  <li class="mb-2 d-flex align-items-center">
+                    <span class="badge me-3">✓</span>
+                    {{ ing.name }}
+                  </li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h3 class="h4 mb-3">Project Steps</h3>
+            <ol class="list-group list-group-numbered">
+              {% for step in steps %}
+                <li class="list-group-item border-0 bg-transparent mb-2">{{ step }}</li>
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card shadow-soft">
+          <div class="card-body">
+            <h5 class="card-title">Project Details</h5>
+            <div class="mb-3">
+              <p class="mb-2"><strong>Rating:</strong> {{ recipe.average_rating|floatformat:1 }}/5 ⭐</p>
+            </div>
+            <div class="mb-4">
+              <strong>Skills:</strong><br>
+              {% for tag in recipe.tags.all %}
+                <a href="{% url 'recipes:tag' tag.slug %}" class="badge me-1 mb-1">{{ tag.name }}</a>
+              {% endfor %}
+            </div>
+            <div class="d-grid gap-2">
+              <a href="/" class="btn btn-primary">Back to Portfolio</a>
+              <a href="#contact" class="btn btn-outline-primary">Contact Me</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
