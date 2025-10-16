@@ -2,7 +2,8 @@
 
 A beautiful, responsive portfolio website built with Django and Bootstrap 5, featuring a clean, minimalistic design with smooth animations and modern UI components.
 
-![Portfolio Preview](https://via.placeholder.com/800x400/6366f1/ffffff?text=Modern+Portfolio+Website)
+![Portfolio Preview](![Uploading image.png…]()
+)
 
 ## ✨ Features
 
